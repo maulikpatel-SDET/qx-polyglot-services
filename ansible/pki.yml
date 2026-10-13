@@ -1,0 +1,15 @@
+# R4-26 Ansible: create RSA-2048 private key and a CSR with community.crypto.
+- name: Create service PKI
+  hosts: app
+  tasks:
+    - name: Private key
+      community.crypto.openssl_privatekey:
+        path: /etc/qx/service.key
+        type: RSA
+        size: 2048
+
+    - name: CSR
+      community.crypto.openssl_csr:
+        path: /etc/qx/service.csr
+        privatekey_path: /etc/qx/service.key
+        common_name: service.qx.example.com

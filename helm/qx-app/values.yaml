@@ -1,0 +1,13 @@
+# R4-25 Helm values: signing algorithm and TLS key settings for the chart.
+image:
+  repository: your-registry/qx-app
+  tag: "1.0"
+auth:
+  jwt:
+    algorithm: ES256
+    keySecretName: qx-jwt-ec-key
+tls:
+  certManager:
+    privateKey:
+      algorithm: RSA
+      size: 2048

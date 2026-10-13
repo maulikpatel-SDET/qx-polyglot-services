@@ -1,0 +1,29 @@
+# R4-N10 CloudFormation: KMS keys (not Terraform).
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  BlockchainSigningKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: QX secp256k1 signing key
+      KeySpec: ECC_SECG_P256K1
+      KeyUsage: SIGN_VERIFY
+      KeyPolicy:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: { AWS: "arn:aws:iam::000000000000:root" }
+            Action: "kms:*"
+            Resource: "*"
+  DocumentSigningKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: QX RSA-4096 document signing key
+      KeySpec: RSA_4096
+      KeyUsage: SIGN_VERIFY
+      KeyPolicy:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: { AWS: "arn:aws:iam::000000000000:root" }
+            Action: "kms:*"
+            Resource: "*"
